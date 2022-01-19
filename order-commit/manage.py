@@ -3,7 +3,6 @@ from pathlib import Path
 import os
 
 
-
 def init_django():
     import django
     from django.conf import settings
@@ -13,11 +12,11 @@ def init_django():
 
     BASE_DIR = Path(__file__).resolve().parent.parent
     DATABASE_DIR = os.path.join(BASE_DIR, "order-list", "orderlist")
-    DATABASE_PATH = os.path.join(DATABASE_DIR,"db.sqlite3")
+    DATABASE_PATH = os.path.join(DATABASE_DIR, "db.sqlite3")
     print(DATABASE_PATH)
 
     settings.configure(
-        
+
         INSTALLED_APPS=[
             'django.contrib.auth',
             'django.contrib.contenttypes',
@@ -26,16 +25,17 @@ def init_django():
             'order',
             'rabbitmq',
         ],
-        DATABASES = {
+        DATABASES={
             'default': {
                 'ENGINE': 'django.db.backends.sqlite3',
                 'NAME': DATABASE_PATH,
             }
         },
-        ALLOWED_HOSTS = [],
-        DEBUG = True
+        ALLOWED_HOSTS=[],
+        DEBUG=True
     )
     django.setup()
+
 
 if __name__ == "__main__":
     from django.core.management import execute_from_command_line

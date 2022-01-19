@@ -1,0 +1,1 @@
+pycodestyle food/ main.py manage.py order/ rabbitmq/ restaurant/

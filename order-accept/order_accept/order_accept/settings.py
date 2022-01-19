@@ -26,8 +26,9 @@ DATABASE_PATH = os.path.join(DATABASE_DIR, "db.sqlite3")
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
-
+SECRET_KEY = 'asasasaas'
+RABBITMQ_HOST = os.environ.get('RABBITMQ_HOST','localhost')
+QUEUE_NAME = os.environ.get('QUEUE_NAME','orders')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

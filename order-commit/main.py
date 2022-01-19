@@ -12,13 +12,14 @@ init_django()
 
 def write_database(ch, method, properties, body):
     print(" [x] %r" % body)
-
-    body = json.loads(body)
-    print(f"body: {body}")
-    user = int(body["user"])  # TODO : use .get and add key not found check
-    restaurant = int(body["restaurant"])
-    food_items = tuple(ast.literal_eval(body["items"]))
-    status = 1  # body["status"]
+    import pdb
+    pdb.set_trace()
+    body = ast.literal_eval(body.decode("utf-8"))
+    user = body.get("user", None)  # TO DO :add key not found check
+    # TO DO : add key not found check
+    restaurant = body.get("restaurant", None)
+    food_items = tuple(body.get("items"))  # TO DO:add key not found check
+    status = body.get("status", None)  # TO DO : use .get and
 
     try:
         user = User.objects.get(pk=user)

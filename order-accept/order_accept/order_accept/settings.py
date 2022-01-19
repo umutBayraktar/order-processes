@@ -17,16 +17,16 @@ import os
 
 # TO DO: Change It use environment variable
 BASE_DIR = Path(__file__).resolve().parent.parent
-PROJECTS_DIR = os.path.join(BASE_DIR,"..","..")
+PROJECTS_DIR = os.path.join(BASE_DIR, "..", "..")
 DATABASE_DIR = os.path.join(PROJECTS_DIR, "order-list", "orderlist")
-DATABASE_PATH = os.path.join(DATABASE_DIR,"db.sqlite3")
+DATABASE_PATH = os.path.join(DATABASE_DIR, "db.sqlite3")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-i+eg2(808s$2=(ym*tc9)g(804%ts-^tsnixnx3)y03i^u0bf5'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

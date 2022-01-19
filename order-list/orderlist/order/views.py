@@ -6,9 +6,10 @@ from rest_framework import status
 from order.models import Order, OrderStatus
 from order.serializers import OrderSerializer
 
+
 class OrderList(ListAPIView):
 
-    queryset = Order.objects.select_related('status','restaurant')
+    queryset = Order.objects.select_related('status', 'restaurant')
     serializer_class = OrderSerializer
 
     def list(self, request):
@@ -19,6 +20,6 @@ class OrderList(ListAPIView):
                 status_id = OrderStatus.objects.get(status=order_status)
                 queryset = queryset.filter(status=status_id)
             except Exception:
-                return Response(status=status.HTTP_400_BAD_REQUEST)              
+                return Response(status=status.HTTP_400_BAD_REQUEST)
         serializer = OrderSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

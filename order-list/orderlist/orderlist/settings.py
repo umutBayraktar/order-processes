@@ -34,7 +34,10 @@ INSTALLED_APPS = [
     'restaurant',
     'food',
     'order',
+    'django_filters',
     'rest_framework',
+    'rest_framework_swagger',
+    'drf_yasg',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,6 +76,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'orderlist.wsgi.application'
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS':
+    'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

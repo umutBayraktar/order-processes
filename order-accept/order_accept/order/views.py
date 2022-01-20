@@ -13,7 +13,7 @@ class AddOrder(APIView):
 
     connector = RabbitMQConnector(host=settings.RABBITMQ_HOST)
 
-    @swagger_auto_schema(request_body=OrderSerializer, responses={200: {}, 400: {}})
+    @swagger_auto_schema(request_body=OrderSerializer, responses={201: {}, 400: {}})
     def post(self, request):
 
         serializer = OrderSerializer(data=request.data)

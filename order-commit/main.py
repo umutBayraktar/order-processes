@@ -6,6 +6,7 @@ from order.models import Order, OrderStatus
 from food.models import Food
 from restaurant.models import Restaurant
 from manage import init_django
+from django.conf import settings
 
 init_django()
 
@@ -52,6 +53,12 @@ def write_database(ch, method, properties, body):
 
 
 if __name__ == '__main__':
-    connector = RabbitMQConnector(host='localhost')
+    host = settings.RABBITMQ_HOST
+    port = settings.RABBITMQ_PORT
+    user = settings.RABBITMQ_USER
+    password = settings.RABBITMQ_PASSWORD
+    virtual_host = settings.RABBITMQ_VIRTUALHOST
+    connector = RabbitMQConnector(
+        host=host, port=port, virtual_host=virtual_host, user=user, password=password)
     connector.set_consumer('orders', write_database)
     connector.start_consume()

@@ -1,9 +1,11 @@
 #!/usr/bin/env python
-from pathlib import Path
 import os
+import dotenv
+from pathlib import Path
 
 
 def init_django():
+    dotenv.read_dotenv()
     import django
     from django.conf import settings
 
@@ -11,12 +13,16 @@ def init_django():
         return
 
     BASE_DIR = Path(__file__).resolve().parent.parent
-    DATABASE_DIR = os.path.join(BASE_DIR, "order-list", "orderlist")
-    DATABASE_PATH = os.path.join(DATABASE_DIR, "db.sqlite3")
-    print(DATABASE_PATH)
+    #DATABASE_DIR = os.path.join(BASE_DIR, "order-list", "orderlist")
+    DATABASE_PATH = os.path.join(BASE_DIR, "db.sqlite3")
+    DATABASE_FILE = os.environ.get("DATABASE_FILE", DATABASE_PATH)
 
     settings.configure(
         RABBITMQ_HOST=os.environ.get('RABBITMQ_HOST', 'localhost'),
+        RABBITMQ_VIRTUALHOST=os.environ.get('RABBITMQ_VIRTUALHOST', '/'),
+        RABBITMQ_PORT=os.environ.get('RABBITMQ_PORT', 'localhost'),
+        RABBITMQ_USER=os.environ.get('RABBITMQ_USER', 'localhost'),
+        RABBITMQ_PASSWORD=os.environ.get('RABBITMQ_PASSWORD', 'localhost'),
         QUEUE_NAME=os.environ.get('QUEUE_NAME', 'orders'),
         DEFAULT_AUTO_FIELD='django.db.models.BigAutoField',
         INSTALLED_APPS=[
@@ -33,8 +39,8 @@ def init_django():
                 'NAME': DATABASE_PATH,
             }
         },
-        ALLOWED_HOSTS=[],
-        DEBUG=True
+        ALLOWED_HOSTS=['*'],
+        DEBUG=os.environ.get('DEBUG', True),
     )
     django.setup()
 

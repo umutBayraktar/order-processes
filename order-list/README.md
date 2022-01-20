@@ -24,11 +24,12 @@
 
     Go to the project directory
 
-    $ cd orderList
+    $ cd orderlist
 
     Edit .env file for your environment values
 
     Create database
+
     $ python manage.py migrate
     
     Run django project

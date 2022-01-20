@@ -53,12 +53,17 @@ def write_database(ch, method, properties, body):
 
 
 if __name__ == '__main__':
+
     host = settings.RABBITMQ_HOST
-    port = settings.RABBITMQ_PORT
+    port = int(settings.RABBITMQ_PORT)
     user = settings.RABBITMQ_USER
     password = settings.RABBITMQ_PASSWORD
     virtual_host = settings.RABBITMQ_VIRTUALHOST
-    connector = RabbitMQConnector(
-        host=host, port=port, virtual_host=virtual_host, user=user, password=password)
+    if host == 'localhost':
+        connector = RabbitMQConnector(
+            host=host)
+    else:
+        connector = RabbitMQConnector(
+            host=host, port=port, virtual_host=virtual_host, user=user, password=password)
     connector.set_consumer('orders', write_database)
     connector.start_consume()

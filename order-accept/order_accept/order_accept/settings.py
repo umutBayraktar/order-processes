@@ -27,10 +27,10 @@ DATABASE_PATH = os.path.join(DATABASE_DIR, "db.sqlite3")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'asasasaas'
-RABBITMQ_HOST = os.environ.get('RABBITMQ_HOST','localhost')
-QUEUE_NAME = os.environ.get('QUEUE_NAME','orders')
+RABBITMQ_HOST = os.environ.get('RABBITMQ_HOST', 'localhost')
+QUEUE_NAME = os.environ.get('QUEUE_NAME', 'orders')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', True)
 
 ALLOWED_HOSTS = []
 
@@ -39,6 +39,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'rest_framework',
+    'rest_framework_swagger',
+    'drf_yasg',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -87,7 +89,12 @@ DATABASES = {
         'NAME': DATABASE_PATH,
     }
 }
-
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS':
+    'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'  # <-- Here
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

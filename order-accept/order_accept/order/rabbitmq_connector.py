@@ -6,8 +6,13 @@ class RabbitMQConnector:
     def __init__(self, host='localhost', port=5672, virtual_host='/', user='guest', password='guest'):
         "Constructor"
         self.credentials = pika.PlainCredentials(user, password)
-        self.connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host, port, virtual_host, self.credentials))
+        if host == 'localhost':
+            self.connection = pika.BlockingConnection(
+                pika.ConnectionParameters(host))
+        else:
+            self.connection = pika.BlockingConnection(
+                pika.ConnectionParameters(host, port, virtual_host, self.credentials))
+
         self.channel = self.connection.channel()
 
     def send_message(self, queue_name, message):

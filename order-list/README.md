@@ -29,9 +29,15 @@
     Edit .env file for your environment values
 
     Create database
+    *If you want to create an empty database you can use the command below for database creation*
 
     $ python manage.py migrate
     
+    Then, you can use this command for creating superuser and add datas with admin panel
+    localhost:8000/admin
+
+    $ python manage.py createsuperuser
+
     Run django project
 
     $ python manage.py runserver

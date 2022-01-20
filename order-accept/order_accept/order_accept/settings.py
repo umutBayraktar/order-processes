@@ -9,9 +9,8 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
-from pathlib import Path
 import os
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -26,8 +25,13 @@ DATABASE_PATH = os.path.join(DATABASE_DIR, "db.sqlite3")
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'asasasaas'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'aaaa')
+
 RABBITMQ_HOST = os.environ.get('RABBITMQ_HOST', 'localhost')
+RABBITMQ_VIRTUALHOST = os.environ.get('RABBITMQ_VIRTUALHOST', '/')
+RABBITMQ_PORT = os.environ.get('RABBITMQ_PORT', 'localhost')
+RABBITMQ_USER = os.environ.get('RABBITMQ_USER', 'localhost')
+RABBITMQ_PASSWORD = os.environ.get('RABBITMQ_PASSWORD', 'localhost')
 QUEUE_NAME = os.environ.get('QUEUE_NAME', 'orders')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', True)
@@ -93,7 +97,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS':
     'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 100,
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'  # <-- Here
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
 # Password validation

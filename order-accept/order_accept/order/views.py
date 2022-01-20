@@ -11,7 +11,13 @@ from order.rabbitmq_connector import RabbitMQConnector
 
 class AddOrder(APIView):
 
-    connector = RabbitMQConnector(host=settings.RABBITMQ_HOST)
+    host = settings.RABBITMQ_HOST
+    port = settings.RABBITMQ_PORT
+    user = settings.RABBITMQ_USER
+    password = settings.RABBITMQ_PASSWORD
+    virtual_host = settings.RABBITMQ_VIRTUALHOST
+    connector = RabbitMQConnector(
+        host=host, port=port, virtual_host=virtual_host, user=user, password=password)
 
     @swagger_auto_schema(request_body=OrderSerializer, responses={201: {}, 400: {}})
     def post(self, request):

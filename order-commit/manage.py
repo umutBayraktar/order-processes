@@ -20,9 +20,9 @@ def init_django():
     settings.configure(
         RABBITMQ_HOST=os.environ.get('RABBITMQ_HOST', 'localhost'),
         RABBITMQ_VIRTUALHOST=os.environ.get('RABBITMQ_VIRTUALHOST', '/'),
-        RABBITMQ_PORT=os.environ.get('RABBITMQ_PORT', 'localhost'),
-        RABBITMQ_USER=os.environ.get('RABBITMQ_USER', 'localhost'),
-        RABBITMQ_PASSWORD=os.environ.get('RABBITMQ_PASSWORD', 'localhost'),
+        RABBITMQ_PORT=os.environ.get('RABBITMQ_PORT', 5672),
+        RABBITMQ_USER=os.environ.get('RABBITMQ_USER', 'guest'),
+        RABBITMQ_PASSWORD=os.environ.get('RABBITMQ_PASSWORD', 'guest'),
         QUEUE_NAME=os.environ.get('QUEUE_NAME', 'orders'),
         DEFAULT_AUTO_FIELD='django.db.models.BigAutoField',
         INSTALLED_APPS=[

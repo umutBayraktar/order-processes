@@ -28,12 +28,13 @@ class RabbitMQConnectorTests(TestCase):
         conn = BlockingConnection(
             ConnectionParameters(host=settings.RABBITMQ_HOST))
         channel = conn.channel()
+        channel.queue_declare(queue='test_cs', durable=True)
         channel.basic_publish(
-            exchange='', routing_key='test', body=test_message)
+            exchange='', routing_key='test_cs', body=test_message)
 
         def consume(ch, method, properties, body):
             body = body.decode("utf-8")
             self.assertEqual(body, test_message)
             self.connector.close()
-        self.connector.set_consumer("test", consume)
+        self.connector.set_consumer("test_cs", consume)
         self.connector.start_consume()

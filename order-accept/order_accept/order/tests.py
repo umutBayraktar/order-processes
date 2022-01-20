@@ -162,7 +162,6 @@ class OrderAcceptAPITests(TestCase):
         conn = BlockingConnection(
             ConnectionParameters(host=settings.RABBITMQ_HOST))
         channel = conn.channel()
-
         response = self.client.post(
             self.api_url, self.correct_data, format='json')
         self.assertEqual(response.status_code, 201)

@@ -16,7 +16,9 @@ def init_django():
     print(DATABASE_PATH)
 
     settings.configure(
-
+        RABBITMQ_HOST=os.environ.get('RABBITMQ_HOST', 'localhost'),
+        QUEUE_NAME=os.environ.get('QUEUE_NAME', 'orders'),
+        DEFAULT_AUTO_FIELD='django.db.models.BigAutoField',
         INSTALLED_APPS=[
             'django.contrib.auth',
             'django.contrib.contenttypes',

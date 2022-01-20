@@ -10,6 +10,7 @@ COPY ./order/ /code/order/
 COPY ./rabbitmq/ /code/rabbitmq/
 COPY ./restaurant/ /code/restaurant/
 COPY ./main.py /code/main.py
+COPY ./db.sqlite3 /code/db.sqlite3
 COPY ./manage.py /code/manage.py
 COPY ./.env /code/.env
 EXPOSE 8000
